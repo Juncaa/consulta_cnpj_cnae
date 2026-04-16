@@ -15,6 +15,8 @@ def buscar_cnpj(cnpj):
                 'cnpj': cnpj,
                 'razao_social': dados.get("razao_social", "N/A"),
                 'cnae_fiscal': dados.get("cnae_fiscal", "N/A"),
+                'municipio': dados.get("municipio", "N/A"),
+                'uf': dados.get("uf", "N/A"),
                 'status': 'sucesso'
             }
         else:
@@ -22,6 +24,8 @@ def buscar_cnpj(cnpj):
                 'cnpj': cnpj,
                 'razao_social': "N/A",
                 'cnae_fiscal': "N/A",
+                'municipio': "N/A",
+                'uf': "N/A",
                 'status': f'erro: {resposta.status_code}'
             }
     except Exception as e:
@@ -29,6 +33,8 @@ def buscar_cnpj(cnpj):
             'cnpj': cnpj,
             'razao_social': "N/A",
             'cnae_fiscal': "N/A",
+            'municipio': "N/A",
+            'uf': "N/A",
             'status': f'erro: {str(e)}'
         }
 
@@ -75,14 +81,14 @@ def processar_lista_cnpjs():
         print(f"[{i}/{len(cnpjs)}] Buscando CNPJ: {cnpj}")
         resultado = buscar_cnpj(cnpj)
         resultados.append(resultado)
-        print(f"  └─ {resultado['razao_social']} | CNAE Fiscal: {resultado['cnae_fiscal']}\n")
+        print(f"  └─ {resultado['razao_social']} | CNAE: {resultado['cnae_fiscal']} | {resultado['municipio']}/{resultado['uf']}\n")
     
     # Salvar em CSV
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     nome_arquivo = f"resultado_cnpjs_{timestamp}.csv"
     
     with open(nome_arquivo, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=['cnpj', 'razao_social', 'cnae_fiscal', 'status'])
+        writer = csv.DictWriter(f, fieldnames=['cnpj', 'razao_social', 'cnae_fiscal', 'municipio', 'uf', 'status'])
         writer.writeheader()
         writer.writerows(resultados)
     
