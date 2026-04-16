@@ -1,6 +1,6 @@
 # 📊 Consulta de CNPJs em Lote
 
-Este projeto permite consultar informações de múltiplos CNPJs utilizando a API pública da BrasilAPI, retornado o CNAE.
+Este projeto permite consultar informações de múltiplos CNPJs utilizando a API pública da BrasilAPI, retornado o CNAE em formato CSV.
 
 ---
 
@@ -32,8 +32,6 @@ Com isso, foi desenvolvido este script para automatizar o processo, tornando a c
   * CNAE Fiscal
 
 * Exportação automática para CSV
-
-* Resumo de sucessos e erros
 
 ---
 
